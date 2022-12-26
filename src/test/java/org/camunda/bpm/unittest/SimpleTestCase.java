@@ -52,8 +52,9 @@ public class SimpleTestCase {
 
 		// start before New_Task
 		processInstantiationBuilder.startBeforeActivity("New_Task");
-		processInstantiationBuilder.startBeforeActivity("New_SubTask");
 		ProcessInstance pid = processInstantiationBuilder.execute();
+
+		rule.getRuntimeService().createMessageCorrelation("message1").correlate();
 
 		TaskService taskService = rule.getTaskService();
 		Task task = taskService.createTaskQuery().singleResult();
